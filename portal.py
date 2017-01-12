@@ -56,8 +56,8 @@ def grade_HTML(report):
         if row is not None:
             for cell in row:
                 if cell is not None:
-                    html = html+'\n'+''+cell+'\n'
-            html = html + '-------------'
+                    html = html+'\n'+cell
+            html = html + '\n-------------'
     html = html + '\n Developed By @Cyanogen_ir \n BenYamin Salimi \n Github: BenYaminSalimi \ '
     return html
 
