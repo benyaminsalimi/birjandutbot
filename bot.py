@@ -31,7 +31,8 @@ def reportcard(bot, update,args, chat_data):
         md5.update(password)
         check_user = get_session(username,md5.hexdigest())
         # check user name and pass:
-        if check_user != '{}':
+        if str(check_user) != '{}':
+            update.message.reply_text('من رفتم نمره هاتو بیارم کمی صبر کن...')
             report =  grade_HTML(grade(check_user))
             update.message.reply_text(report)
         else:
@@ -39,6 +40,7 @@ def reportcard(bot, update,args, chat_data):
     
     except(IndexError, ValueError):
         if localdb is not None:
+            update.message.reply_text('من رفتم نمره هاتو بیارم کمی صبر کن...')
             report =  grade_HTML(grade(get_session(localdb.username,localdb.md5)))
             update.message.reply_text(report)
         else:
@@ -54,9 +56,10 @@ def s(bot, update,args, chat_data):
         password=str(args[1])
         md5 = hashlib.md5()
         md5.update(password)
+        update.message.reply_text('صبر کن ببینم شماره دانشجویی و رمزت رو درست زدی یا نه!')
         check_user= get_session(username,md5.hexdigest())
 
-        if check_user != '{}':
+        if str(check_user) != '{}':
             save(username,md5.hexdigest(),chat_id)
             #bot.sendChatAction(chat_id=chat_id, action=telegram.ChatAction.TYPING)
             update.message.reply_text('ثبت نام شما به اتمام رسید، از این پس میتوانید از دستور \n /reportcard برای نمایش نمره \n استفاده کنید')
